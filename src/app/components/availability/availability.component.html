@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <h3>Availability Prediction</h3>
+
+  <div class="row g-3">
+    <div class="col-md-4">
+      <label>From</label>
+      <input type="date" class="form-control" [(ngModel)]="startDate" />
+    </div>
+    <div class="col-md-4">
+      <label>To</label>
+      <input type="date" class="form-control" [(ngModel)]="endDate" />
+    </div>
+    <div class="col-md-4 align-self-end">
+      <button class="btn btn-primary w-100" (click)="getAvailability()">Check</button>
+    </div>
+  </div>
+
+  <table class="table mt-4" *ngIf="results.length">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Occupancy</th>
+        <th>Demand</th>
+        <th>Predicted Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of results">
+        <td>{{ r.date }}</td>
+        <td>{{ r.occupancyRate }}</td>
+        <td>{{ r.demand }}</td>
+        <td>{{ r.predictedPrice }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,28 @@
+<div class="container mt-4">
+  <h3>Room List</h3>
+  <a class="btn btn-primary mb-3" href="/rooms/create">Add New Room</a>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Room Type</th>
+        <th>Capacity</th>
+        <th>Price (per night)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let room of rooms">
+        <td>{{ room.id }}</td>
+        <td>{{ room.roomType }}</td>
+        <td>{{ room.capacity }}</td>
+        <td>{{ room.pricePerNight | currency }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" (click)="editRoom(room.id)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteRoom(room.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

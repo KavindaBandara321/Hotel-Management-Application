@@ -1,0 +1,23 @@
+<div class="container mt-4">
+  <h3>{{ isEdit ? 'Edit Room' : 'Create Room' }}</h3>
+
+  <form (ngSubmit)="save()">
+    <div class="mb-3">
+      <label class="form-label">Room Type</label>
+      <input class="form-control" [(ngModel)]="room.roomType" name="roomType" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Capacity</label>
+      <input type="number" class="form-control" [(ngModel)]="room.capacity" name="capacity" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Price per Night</label>
+      <input type="number" class="form-control" [(ngModel)]="room.pricePerNight" name="pricePerNight" required />
+    </div>
+
+    <button type="submit" class="btn btn-success">{{ isEdit ? 'Update' : 'Create' }}</button>
+    <a routerLink="/rooms" class="btn btn-secondary ms-2">Cancel</a>
+  </form>
+</div>

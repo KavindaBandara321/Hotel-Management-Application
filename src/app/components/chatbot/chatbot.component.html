@@ -1,0 +1,23 @@
+<div class="chat-container">
+  <h5>Hotel Assistant</h5>
+
+  <div class="chat-body">
+    <div class="chat-messages">
+      <div *ngFor="let msg of messages">
+        <strong *ngIf="msg.sender === 'user'">You:</strong>
+        <strong *ngIf="msg.sender === 'bot'">Bot:</strong>
+        {{ msg.text }}
+      </div>
+    </div>
+
+    <div class="chat-input">
+      <input
+        [(ngModel)]="userInput"
+        (keyup.enter)="ask()"
+        class="form-control"
+        placeholder="Ask a question..."
+      />
+      <button class="btn btn-sm btn-primary mt-2" (click)="ask()">Send</button>
+    </div>
+  </div>
+</div>

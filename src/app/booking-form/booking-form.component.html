@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <h3>Create Booking</h3>
+
+  <div *ngIf="message" class="alert alert-success">{{ message }}</div>
+
+  <form (ngSubmit)="submit()" #form="ngForm">
+    <div class="mb-3">
+      <label class="form-label">Guest Name</label>
+      <input type="text" class="form-control" [(ngModel)]="booking.guestName" name="guestName" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Room</label>
+      <select class="form-select" [(ngModel)]="booking.roomId" name="roomId" required>
+        <option *ngFor="let room of rooms" [value]="room.id">{{ room.roomType }}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Check-In Date</label>
+      <input type="date" class="form-control" [(ngModel)]="booking.checkInDate" name="checkInDate" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Check-Out Date</label>
+      <input type="date" class="form-control" [(ngModel)]="booking.checkOutDate" name="checkOutDate" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Special Requests</label>
+      <div *ngFor="let req of requests" class="form-check">
+        <input class="form-check-input"
+               type="checkbox"
+               [value]="req.id"
+               [(ngModel)]="booking.specialRequestIds"
+               name="specialRequestIds">
+        <label class="form-check-label">{{ req.description }}</label>
+      </div>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input class="form-check-input" type="checkbox" [(ngModel)]="booking.isRecurring" name="isRecurring">
+      <label class="form-check-label">Is Recurring?</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+</div>

@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <h3>Weekly Report</h3>
+
+  <div class="mb-3">
+    <label>Start Date</label>
+    <input type="date" [(ngModel)]="startDate" class="form-control w-25 d-inline" />
+    <button class="btn btn-success ms-2" (click)="loadReport()">Generate</button>
+  </div>
+
+  <div *ngIf="report">
+    <div *ngFor="let day of report | keyvalue">
+      <h5 class="mt-3">{{ day.key }}</h5>
+      <ul class="list-group mb-3">
+        <li class="list-group-item" *ngFor="let b of (day.value || [])">
+          Booking #{{ b.bookingId }} - {{ b.guestName }} | Room ID: {{ b.roomId }}
+          <span *ngIf="b.specialRequests?.length">
+            | Requests: {{ b.specialRequests.join(', ') }}
+          </span>
+        </li>
+        <li *ngIf="!day.value?.length" class="list-group-item text-muted">No data</li>
+      </ul>
+    </div>
+  </div>
+</div>

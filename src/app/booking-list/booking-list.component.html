@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <h2>Bookings</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Guest</th>
+        <th>Check-In</th>
+        <th>Check-Out</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of bookings">
+        <td>{{ b.id }}</td>
+        <td>{{ b.guestName }}</td>
+        <td>{{ b.checkInDate | date }}</td>
+        <td>{{ b.checkOutDate | date }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="delete(b.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

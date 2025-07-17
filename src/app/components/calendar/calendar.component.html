@@ -1,0 +1,28 @@
+<div class="container mt-4">
+  <div class="form-group mb-3">
+    <label for="startDate">Select Start Date:</label>
+    <input id="startDate" class="form-control" type="date" [(ngModel)]="startDate">
+    <button class="btn btn-primary mt-2" (click)="loadCalendar()">Load Calendar</button>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <div *ngIf="calendarData">
+    <div *ngFor="let day of calendarData | keyvalue">
+      <h5 class="mt-3">{{ day.key }}</h5>
+      <ul class="list-group mb-3">
+        <ng-container *ngIf="day.value && day.value.length > 0; else noBookings">
+          <li class="list-group-item" *ngFor="let b of day.value">
+            Booking #{{ b.bookingId }} - {{ b.guestName }} (Room {{ b.roomId }})
+            <span *ngIf="b.specialRequests?.length">
+              | Requests: {{ b.specialRequests.join(', ') }}
+            </span>
+          </li>
+        </ng-container>
+        <ng-template #noBookings>
+          <li class="list-group-item text-muted">No bookings</li>
+        </ng-template>
+      </ul>
+    </div>
+  </div>
+</div>
