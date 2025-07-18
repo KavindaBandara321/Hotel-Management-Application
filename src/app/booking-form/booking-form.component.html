@@ -2,28 +2,45 @@
   <h3>Create Booking</h3>
 
   <div *ngIf="message" class="alert alert-success">{{ message }}</div>
+  <div *ngIf="errorMessages.length" class="alert alert-danger">
+    <ul>
+      <li *ngFor="let err of errorMessages">{{ err }}</li>
+    </ul>
+  </div>
 
   <form (ngSubmit)="submit()" #form="ngForm">
     <div class="mb-3">
       <label class="form-label">Guest Name</label>
-      <input type="text" class="form-control" [(ngModel)]="booking.guestName" name="guestName" required>
+      <input type="text" class="form-control" [(ngModel)]="booking.guestName" name="guestName" required minlength="5" #guestName="ngModel">
+      <div *ngIf="guestName.invalid && guestName.touched" class="text-danger">
+        Guest name is required and must be at least 5 characters long.
+      </div>
     </div>
 
     <div class="mb-3">
       <label class="form-label">Room</label>
-      <select class="form-select" [(ngModel)]="booking.roomId" name="roomId" required>
+      <select class="form-select" [(ngModel)]="booking.roomId" name="roomId" required #roomId="ngModel">
         <option *ngFor="let room of rooms" [value]="room.id">{{ room.roomType }}</option>
       </select>
+      <div *ngIf="roomId.invalid && roomId.touched" class="text-danger">
+        Room selection is required.
+      </div>
     </div>
 
     <div class="mb-3">
       <label class="form-label">Check-In Date</label>
-      <input type="date" class="form-control" [(ngModel)]="booking.checkInDate" name="checkInDate" required>
+      <input type="date" class="form-control" [(ngModel)]="booking.checkInDate" name="checkInDate" required #checkIn="ngModel">
+      <div *ngIf="checkIn.invalid && checkIn.touched" class="text-danger">
+        Check-in date is required.
+      </div>
     </div>
 
     <div class="mb-3">
       <label class="form-label">Check-Out Date</label>
-      <input type="date" class="form-control" [(ngModel)]="booking.checkOutDate" name="checkOutDate" required>
+      <input type="date" class="form-control" [(ngModel)]="booking.checkOutDate" name="checkOutDate" required #checkOut="ngModel">
+      <div *ngIf="checkOut.invalid && checkOut.touched" class="text-danger">
+        Check-out date is required.
+      </div>
     </div>
 
     <div class="mb-3">
@@ -43,6 +60,6 @@
       <label class="form-check-label">Is Recurring?</label>
     </div>
 
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Create</button>
   </form>
 </div>

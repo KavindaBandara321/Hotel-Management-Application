@@ -10,13 +10,13 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-booking-form',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './booking-form.component.html',
   styleUrl: './booking-form.component.scss'
 })
 export class BookingFormComponent implements OnInit {
 
-   booking: Booking = {
+  booking: Booking = {
     id: 0,
     roomId: 0,
     guestName: '',
@@ -28,6 +28,7 @@ export class BookingFormComponent implements OnInit {
   rooms: Room[] = [];
   requests: SpecialRequest[] = [];
   message: string = '';
+  errorMessages: string[] = [];
 
   constructor(
     private bookingService: BookingService,
@@ -41,18 +42,36 @@ export class BookingFormComponent implements OnInit {
   }
 
   submit(): void {
-    this.bookingService.create(this.booking).subscribe(() => {
-      this.message = 'Booking created successfully!';
-      this.booking = {
-        id: 0,
-        roomId: 0,
-        guestName: '',
-        checkInDate: '',
-        checkOutDate: '',
-        specialRequestIds: [],
-        isRecurring: false
-      };
+    this.message = '';
+    this.errorMessages = [];
+
+    this.bookingService.create(this.booking).subscribe({
+      next: () => {
+        this.message = 'Booking created successfully!';
+        this.booking = {
+          id: 0,
+          roomId: 0,
+          guestName: '',
+          checkInDate: '',
+          checkOutDate: '',
+          specialRequestIds: [],
+          isRecurring: false
+        };
+      },
+      error: (err) => {
+        if (err.status === 400 && err.error.errors) {
+          // Handle model validation errors
+          for (const key in err.error.errors) {
+            if (err.error.errors[key]) {
+              this.errorMessages.push(...err.error.errors[key]);
+            }
+          }
+        } else if (err.error?.message) {
+          this.errorMessages.push(err.error.message);
+        } else {
+          this.errorMessages.push('An unexpected error occurred.');
+        }
+      }
     });
   }
-
 }

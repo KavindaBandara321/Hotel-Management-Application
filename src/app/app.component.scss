@@ -17,3 +17,59 @@
   right: 20px;
   z-index: 1060;
 }
+
+.room-list-banner {
+  background: linear-gradient(to right, #007bff, #00bcd4);
+  border-bottom: 2px solid #e0e0e0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+}
+
+.room-list-banner h2 {
+  font-weight: 700;
+}
+
+.room-list-banner .btn-outline-light:hover {
+  background-color: #ffffff;
+  color: #007bff;
+}
+
+.hero-banner {
+  background-image: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+  background-size: cover;
+  background-position: center;
+  padding: 100px 20px;
+  margin-bottom: 20px;
+  border-bottom: 4px solid #007bff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  min-height: 300px;
+}
+
+.hero-banner h1 {
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.hero-banner p {
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 1.2rem;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hero-banner .btn {
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 8px;
+
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.highlight {
+  color: #ffdd57; // golden yellow
+  font-weight: 600;
+  text-decoration: underline;
+}

@@ -11,7 +11,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { ReportsComponent } from './components/reports/reports.component';
 
 export const routes: Routes = [
-  // More specific routes first
+
   { path: 'bookings/create', component: BookingFormComponent },
   { path: 'bookings/edit/:id', component: BookingFormComponent },
   { path: 'bookings', component: BookingListComponent },
@@ -28,7 +28,6 @@ export const routes: Routes = [
   { path: 'calendar', component: CalendarComponent },
   { path: 'reports', component: ReportsComponent },
   
-  // Default redirect
-  { path: '', redirectTo: '/rooms', pathMatch: 'full' },
-  { path: '**', redirectTo: '/rooms' }
+  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: '' }
 ];
